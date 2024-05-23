@@ -23,6 +23,9 @@ class NewsDeleteView(DeleteView):
     success_url = '/news'
     template_name = 'news/news_delete.html'
 
+def redirectToCreatePost(req):
+    return render(req,'news/create.html')
+
 def create(request):
     error = ''
     if request.method == 'POST':
