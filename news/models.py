@@ -1,11 +1,30 @@
 from django.db import models
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.utils import timezone
 
 class Articles(models.Model):
-    title = models.CharField('Название', max_length=50)
-    anons = models.CharField('Анонс', max_length=250)
-    full_text = models.TextField('Статья')
-    date = models.DateTimeField('Дата публикации')
-
+    title = models.CharField(
+        'Название',
+        max_length= 50,
+        validators=[
+            MinLengthValidator(4, 'Название должно быть не менее 4 символов'),
+            MaxLengthValidator(50, 'Название должно быть не более 50 символов')
+        ]
+    )
+    anons = models.CharField(
+        'Анонс',
+        max_length=100,
+        validators=[
+            MaxLengthValidator(100, 'Анонс должен быть не более 100 символов')
+        ]
+    )
+    full_text = models.TextField(
+        'Статья',
+        validators=[
+            MinLengthValidator(50, 'Статья должна быть не менее 50 символов')
+        ]
+    )
+    date = models.DateTimeField('Дата публикации', default=timezone.now)
     def __str__(self):
         return self.title
 

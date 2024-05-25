@@ -27,18 +27,13 @@ def redirectToCreatePost(req):
     return render(req,'news/create.html')
 
 def create(request):
-    error = ''
     if request.method == 'POST':
         form = ArticlesForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('news_home')
-        else:
-            error = 'Форма была неверной'
 
     data = {
-        'form': form,
-        'error': error
+        'form': form
     }
-    print(data)
     return render(request,'news/create.html', data)
