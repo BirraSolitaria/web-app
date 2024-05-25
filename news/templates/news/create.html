@@ -8,8 +8,20 @@
             <input type="text" name="title" class="form-control" placeholder="Название статьи" maxlength="50" required id="id_title"><br>
             <input type="text" name="anons" class="form-control" placeholder="Анонс статьи" maxlength="250" required id="id_anons"><br>
             <textarea name="full_text" cols="40" rows="10" class="form-control" placeholder="Текст статьи" required id="id_full_text"></textarea><br>
-            <input type="text" name="date" class="form-control" placeholder="Дата публикации" required id="id_date"><br>
-            <span>{{ error }}</span>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <button class="btn btn-success" type="submit">Добавить статью</button>
         </form>
     </div>
