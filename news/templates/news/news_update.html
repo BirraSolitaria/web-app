@@ -4,13 +4,26 @@
 {% block content %}
     <div class="features">
         <h1>Редактирование статьи</h1>
-        <form method="post">
+        <form method="post" action="create">
             {% csrf_token %}
-            {{ form.title }}<br>
-            {{ form.anons }}<br>
-            {{ form.full_text }}<br>
-            {{ form.date }}<br>
-            <span>{{ error }}</span>
+            <input type="text" name="title" class="form-control" placeholder="Название статьи" maxlength="50" required id="id_title"><br>
+            <input type="text" name="anons" class="form-control" placeholder="Анонс статьи" maxlength="250" required id="id_anons"><br>
+            <textarea name="full_text" cols="40" rows="10" class="form-control" placeholder="Текст статьи" required id="id_full_text"></textarea><br>
+            <input type="file" name="image" class="form-control" placeholder="Изображение" required id="id_image"><br>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <button class="btn btn-success" type="submit">Редактировать</button>
         </form>
     </div>

@@ -3,11 +3,12 @@
 {% block content %}
     <div class="features">
         <h1>Форма по добавлению статьи</h1>
-        <form method="post" action="create">
+        <form method="post" action="create" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="title" class="form-control" placeholder="Название статьи" maxlength="50" required id="id_title"><br>
             <input type="text" name="anons" class="form-control" placeholder="Анонс статьи" maxlength="250" required id="id_anons"><br>
             <textarea name="full_text" cols="40" rows="10" class="form-control" placeholder="Текст статьи" required id="id_full_text"></textarea><br>
+            <input type="file" name="image" class="form-control" placeholder="Изображение" required id="id_image"><br>
             {% if form.errors %}
                 {% for field in form %}
                     {% for error in field.errors %}

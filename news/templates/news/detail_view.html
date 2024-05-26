@@ -6,6 +6,11 @@
         <h1>{{ article.title }}</h1>
         <p>{{ article.date }}</p>
         <p>{{ article.full_text }}</p>
+        {% if article.image %}
+         <div>
+             <p><img src="{{ article.image.url }}" width="200"></p>
+         </div>
+     {% endif %}
         <a href="{% url 'news_delete' article.id %}" class="btn btn-danger">Удалить</a>
         <a href="{% url 'news_update' article.id %}" class="btn btn-info">Редактировать</a>
     </div>
