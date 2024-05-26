@@ -4,7 +4,7 @@
 {% block content %}
     <div class="features">
         <h1>Редактирование статьи</h1>
-        <form method="post" action="create">
+        <form method="post" action="update" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="title" class="form-control" placeholder="Название статьи" maxlength="50" required id="id_title"><br>
             <input type="text" name="anons" class="form-control" placeholder="Анонс статьи" maxlength="250" required id="id_anons"><br>
