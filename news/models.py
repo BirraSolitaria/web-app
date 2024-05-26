@@ -24,6 +24,7 @@ class Articles(models.Model):
             MinLengthValidator(50, 'Статья должна быть не менее 50 символов')
         ]
     )
+    image = models.ImageField(upload_to='uploads_model/%Y%m%d/', null=True, blank=True)
     date = models.DateTimeField('Дата публикации', default=timezone.now)
     def __str__(self):
         return self.title
