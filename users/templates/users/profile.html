@@ -1,0 +1,41 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+    <div class="features">
+        <h1>Профиль</h1>
+        <form method="post" action="profile" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if user.image_profile %}
+                <div>
+                    <p><img src="{{ user.image_profile.url }}" width="200"></p>
+                </div>
+            {% else %}
+                <div>
+                    <p><img src="{% static 'main/img/1.png' %}" width="200"></p>
+                </div>
+            {% endif %}
+            <input type="text" name="first_name" class="form-control" value="{{ user.first_name }}" required id="id_first_name"><br>
+            <input type="text" name="last_name" class="form-control" value="{{ user.last_name }}" required id="id_last_name"><br>
+            <input type="text" name="username" class="form-control" value="{{ user.username }}" id="id_username"><br>
+            <input type="text" name="email" class="form-control" value="{{ user.email }}" id="id_email"><br>
+            <input type="file" name="image_profile" class="form-control" required id="id_image_profile"><br>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {{ error }}
+            <button class="btn btn-success" type="submit">Сохранить</button>
+        </form>
+    </div>
+{% endblock %}
