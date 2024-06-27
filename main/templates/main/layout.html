@@ -17,6 +17,13 @@
         <span class="logo">Web</span>
         <h3>Навигация</h3>
         <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">Профиль</a></li>
+            <li><a href="">Выйти</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Войти</a></li>
+            <li><a href="{% url 'register' %}">Регистрация</a></li>
+            {% endif %}
             <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Главная</a></li>
             <li><a href="{% url 'news_home' %}"><i class="fas fa-newspaper"></i>Новости</a></li>
             <li><a href="{% url 'createPost' %}"><i class="fas fa-plus-circle"></i>Добавить запись</a></li>
